@@ -8,7 +8,12 @@ const permAlone = (str, counter = 1, arr = str.split(''), output = [], setArr = 
   // base case. If this is true, then the permutations are done
   else if (counter === (str.length)) {
     // take the last output, run through regex and count the number of arrays in output
-    return output
+    return output.filter(array => {
+      let newStr = array.join('')
+      // only return things without consecutive chars
+      let regex = /(.)\1+/
+      return !regex.test(newStr) 
+    }).length
   }
 
 // since at this point we're not done with the last char, reset the output
@@ -27,4 +32,4 @@ return permAlone(str, counter += 1, arr = str.split(''), setArr = output, output
 
 }
 
-console.log(permAlone('1234'))
+console.log(permAlone('aaabb'))
