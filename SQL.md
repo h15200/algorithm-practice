@@ -1,5 +1,10 @@
 # SQL QUERIES
 
+
+
+
+
+
 ## Syntax - best practice to capitalize all reserved words for readability
 
 ex. 
@@ -13,9 +18,16 @@ LIMIT
 
 
 
-## SELECT
+## SELECT 
 
 Used first. must specify the name of row you are querying
+You can also print onto a column any string `SELECT 'HELLO SQL'`
+
+### (optional) DISTINCT
+
+
+Using SELECT DINSTINC will only query unique items and skip repeats
+
 
 ## FROM
 Name of table you are querying from
