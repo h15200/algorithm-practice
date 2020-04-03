@@ -1,6 +1,2 @@
-const obj = {a:1, b:2, c:3, d:4}
-
-for (stuff in obj) {
-  delete obj.b
-  console.log(`stuff is ${stuff} and obj is ${JSON.stringify(obj)}`)
-}
+let arr = [1,2,3,4]
+console.log([arr[1], arr[0], ...arr.slice(2)])
