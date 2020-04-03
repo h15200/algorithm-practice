@@ -1,0 +1,20 @@
+#!/bin/bash
+
+count=1
+while read line
+  do 
+  # echo "count is $count and line is $line"
+  if (( count==10 ))
+    then 
+     output=$line
+   fi 
+  ((count++))
+   done < lines.txt
+
+
+# -z checks to see if a variable is NOT assigned
+  if [ -z ${output} ];
+    then echo 'no output'
+    else 
+    echo $output
+   fi

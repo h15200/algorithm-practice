@@ -1,0 +1,1 @@
+grep -c  slk lines.txt

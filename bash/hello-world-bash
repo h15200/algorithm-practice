@@ -1,0 +1,5 @@
+#!/bin/bash
+echo What is your name?
+# read will take input and assign it to argument variable
+read username
+Echo Hi, $username!
