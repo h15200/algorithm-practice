@@ -1,69 +1,64 @@
-const quickSort = (arr, isLow, isHigh, lowArr = [], highArr = [], allHighArr = [], allLowArr = []) => {
-  if (arr.length === 1 && isLow) {
-    allLowArr.
-  }
+// Strategy - inner func divide so we can keep save the value of output in between recursive calls
 
 
-  if ([...allLowArr, ...allHighArr].length === arr.length ) {
-    return [...allLowArr, ...allHighArr] // base case
-  }
+const quickSort = (initArr, output = []) => {
 
-  // otherwise, implement quick sort
-
-  // 1st time
-  let pivotIndex = Math.floor(arr.length / 2) // round down so it's not a float
-
-    // set a pivot point and group items to be greater or less
-  arr.forEach(num => {
-    
-    if (num < arr[pivotIndex]) {
-      lowArr.push(num)
-    }
-    else if (num > arr[pivotIndex]) {
-      highArr.push(num)
-    }
-    // if the numbers are all the same, then it's done sorting
-    
-  })
-
-  // FIX THIS ****************************************
-
-  if (lowArr.length === 1 ) {
-    allLowArr.push(lowArr[0])
-    lowArr = [] // delete that branch
-  }
-  else if (highArr.length === 1 ) {
-    allHighArr.push(highArr[0])
-    highArr = []
-  }
-
-  // for remaining branches, run function recusively
-
-  if (lowArr.length > 0 ) {
-    return quickSort(arr = lowArr, lowArr = [], highArr = [], allHighArr, allLowArr)
-  }
-  if (highArr.length > 0 ) {
-    return quickSort(arr = highArr,  lowArr = [], highArr = [], allHighArr, allLowArr))
-  }
-
-
-
-
-  // set new pivot point
-  // call it again recursively until there is only one element
-  // combine into one array
-
-  
-
-
-
-
-
-
-  // dev
-  console.log(`this is after the forEach. Original arr is ${arr}, lowArr is ${lowArr} and highArr is ${highArr}`)
-
-  // return array
+  if (initArr.length === 1 || initArr.every(num => num === initArr[0])) { // if one item or all the same item, then it's alraedy sorted
+  return initArr
 }
 
+// otherwise, go on. 
+
+  const divide = (arr = initArr) => {
+    let lower = []
+    let higher = []
+  
+  // console.log(`top of divide. initArr is ${initArr}, current arr is ${arr}, output is ${output}`)
+
+  // base case
+  if (arr.length === 1 || arr.every(num => num === arr[0])) {
+    output = [...output, ...arr]
+  }
+
+  else { // otherwise, go on
+    // this next block until after while loop will divide the current arr into lower and higher arrays
+    // the first pivot point will be the first element, but if that doesn't work, we will increment at the end
+    let pivotPoint = 0
+    let pivot 
+
+    while (lower.length === 0 || higher.length === 0) { // while higher/lower arrays are empty
+
+    pivot = arr[pivotPoint]
+    // clear both arrays
+    lower = []
+    higher = []
+
+  for (let num of arr) {
+    if (num < pivot) {
+      lower.push(num)
+    }
+    else if (num >= pivot) {
+      higher.push(num)
+    }
+  }
+
+  if (lower.length === 0 || higher.length === 0)
+  pivotPoint++ // change pivot point and try again
+
+  } // end of while loop
+
+  // console.log(`this is the end of the while loop. lower is ${lower} and  higher is ${higher} and output is ${output}`)
+
+  divide(lower) // this will always call the lower array recursively first, putting everything in order
+  divide(higher)
+  }
+}  // end of divide
+
+  divide(initArr)
+  return output
+}
+// console.log(quickSort([1,4,3,7]))
 console.log(quickSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]))
+
+
+// this took 12 hours but good job, me!!
