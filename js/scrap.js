@@ -116,3 +116,16 @@
 // console.log(ex.dequeue())
 // console.log(ex.print())
 // console.log(ex.dequeue())
+
+// question 5: if this a class?
+
+// function Node(value) {
+//   this.value = value;
+//   this.left = null;
+//   this.right = null;
+// }
+
+// const newNode = new Node(4);
+// console.log(newNode instanceof Node);
+// console.log(null instanceof Node);
+// use THING instanceof Class
