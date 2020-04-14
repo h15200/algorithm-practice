@@ -129,3 +129,16 @@
 // console.log(newNode instanceof Node);
 // console.log(null instanceof Node);
 // use THING instanceof Class
+
+// can an if else statement work after another operation immediately to check?
+
+// let a = [];
+
+// if (true) {
+//   a.push('patti');
+// }
+// if (a.length === 1) {
+//   console.log(true);
+// }
+
+// yes
