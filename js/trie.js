@@ -1,3 +1,5 @@
+// make an add, isWord, and print method for a trie
+
 // in this implementation, it will all start from one root Node.
 // The root node will have a keys properties which is a Map. It will have a char key, and the value will be that node associated
 
