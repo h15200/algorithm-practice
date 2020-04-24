@@ -1,34 +1,27 @@
-/*
-Instructions: Here we will create a max heap. 
-Start by just creating an insert method which adds elements to our heap. 
+// given
+function isSorted(arr) {
+  var check = (i) =>
+    i == arr.length - 1 ? true : arr[i] > arr[i + 1] ? false : check(i + 1);
+  return check(0);
+}
+// generate a randomly filled array
+var array = new Array();
+(function createArray(size = 5) {
+  array.push(+(Math.random() * 100).toFixed(0));
+  return size > 1 ? createArray(size - 1) : undefined;
+})(25);
 
-During insertion, it is important to always maintain the heap property. 
-For a max heap this means the root element should always have the greatest value in the tree and all 
-parent nodes should be greater than their children. For an array implementation of a heap,
-this is typically accomplished in three steps:
-
-  Add the new element to the end of the array.
-
-  If the element is larger than its parents, switch them.
-
-  Continue switching until the new element is either smaller than its parent or you reach the root of the tree.
-
-
-Finally, add a print method which returns an array of all the items that have been added to the heap.
-
-
-An element's left child: i * 2
-An element's right child: i * 2 + 1
-An element's parent: Math.floor( i / 2 )
-*/
-
-// add a remove method as well.
-// to remove, remove root, move last element into the root position, then make sure both children are smaller than root. if not, switch values
-
-var MaxHeap = function () {
+var MinHeap = function () {
   // change code below this line
   this.collection = [];
-  this.collection[0] = null; // first element of max or min heap is usually null
+  this.collection[0] = null; // first element of max/min heap is usually null
+
+  /************** Print Method ************/
+  this.print = function () {
+    return this.collection;
+  };
+
+  /*************** Insert Method **********/
 
   this.insert = function (num) {
     this.collection.push(num);
@@ -38,7 +31,7 @@ var MaxHeap = function () {
     let parentValue = this.collection[parentIndex];
     let temp;
     while (true) {
-      if (parentValue === null || parentValue > num) {
+      if (parentValue === null || parentValue <= num) {
         // if these, then done
         break;
       }
@@ -51,10 +44,6 @@ var MaxHeap = function () {
       parentIndex = Math.floor(index / 2);
       parentValue = this.collection[parentIndex];
     } // end of while loop
-  };
-
-  this.print = function () {
-    return this.collection;
   };
 
   /*********************    REMOVE METHOD  ********/
@@ -85,15 +74,19 @@ var MaxHeap = function () {
     this.collection[1] = lastElement;
     this.collection.pop(); // remove duplicate last ele
 
-    if (this.collection[1] > this.collection[2] && !this.collection[3]) {
-      // if new root is bigger than only child and there are no more nodes, done
+    if (this.collection[1] <= this.collection[2] && !this.collection[3]) {
+      // if new root is smaller than only child and there are no more nodes, done
       return root;
-    } else if (this.collection[3] && this.collection[1] > this.collection[3]) {
-      // if the new root is bigger than both existing children, done
+    } else if (
+      this.collection[3] &&
+      this.collection[1] <= this.collection[3] &&
+      this.collection[1] <= this.collection[2]
+    ) {
+      // if right child of root exists and the new root is smaller than it, done
       return root;
     }
 
-    // now at least one of the children of the root is bigger
+    // now at least one of the children of the root is smaller than the new root
 
     const checkAndShift = (
       parentIndex = 1,
@@ -101,8 +94,8 @@ var MaxHeap = function () {
       leftChild = this.collection[parentIndex * 2],
       rightChild = this.collection[parentIndex * 2 + 1]
     ) => {
-      if (parent < leftChild) {
-        if ((rightChild && leftChild > rightChild) || !rightChild) {
+      if (parent > leftChild) {
+        if ((rightChild && leftChild <= rightChild) || !rightChild) {
           const temp = parent;
           this.collection[parentIndex] = leftChild;
           this.collection[parentIndex * 2] = temp;
@@ -112,7 +105,7 @@ var MaxHeap = function () {
             (leftChild = this.collection[parentIndex * 2]),
             (rightChild = this.collection[parentIndex * 2 + 1])
           );
-        } else if (rightChild && rightChild > leftChild) {
+        } else if (rightChild && rightChild <= leftChild) {
           const temp = parent;
           this.collection[parentIndex] = rightChild;
           this.collection[parentIndex * 2 + 1] = temp;
@@ -123,23 +116,46 @@ var MaxHeap = function () {
             (rightChild = this.collection[parentIndex * 2 + 1])
           );
         }
+      } else if (parent > rightChild) {
+        const temp = parent;
+        this.collection[parentIndex] = rightChild;
+        this.collection[parentIndex * 2 + 1] = temp;
+        checkAndShift(
+          (parentIndex = parentIndex * 2 + 1),
+          (parent = this.collection[parentIndex]),
+          (leftChild = this.collection[parentIndex * 2]),
+          (rightChild = this.collection[parentIndex * 2 + 1])
+        );
       }
     }; // end of checkAndShift()
 
     checkAndShift();
     return root;
-  };
+  }; // end of remove
 
-  // change code above this line
+  /************************ Sort Method ***************/
+  this.sort = function (arr) {
+    // add the random array list one by one into minHeap
+    this.collection = [null]; // reset collection
+    for (let num of arr) {
+      this.insert(num);
+    }
+    // make new min Heap with array input
+
+    // console.log(this.collection);
+    const output = [];
+
+    const copy = [...this.collection];
+    while (this.collection.length > 1) {
+      output.push(this.remove());
+    }
+    this.collection = copy;
+    console.log(this.collection);
+    console.log(output);
+    return output;
+  };
 };
 
-const maxHeap = new MaxHeap();
-maxHeap.insert(100);
-// maxHeap.insert(80);
-// maxHeap.insert(70);
-maxHeap.insert(60);
-// maxHeap.insert(5);
-// maxHeap.insert(4);
-// maxHeap.insert(25);
-console.log(maxHeap.remove());
-console.log(maxHeap.print());
+// const test = new MinHeap();
+
+// console.log(isSorted(test.sort(array)));
