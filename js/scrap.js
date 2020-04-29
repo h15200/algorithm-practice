@@ -142,3 +142,8 @@
 // }
 
 // yes
+
+// making an array with Array and fill
+const test = Array(3).fill('hi'); // ['hi', 'hi', 'hi']
+
+// .fill() has optional 2nd arg and 3rd arg which is the starting index and ending index to fill the value with
