@@ -33,31 +33,29 @@ const solve24 = (str) => {
 
   const getPermutations = (arr) => {
     for (let i = 0; i < arr.length; i++) {
+      // add a digit to the temp string
       // if first digit, reset temp to a single char
       if (arr.length === 4) {
         temp = arr[i];
-      } // otherwise, delete digits so it's 4 - current array length long
+      } // otherwise, reset digits so it's 4 - current array length long
       else {
         let newTemp = '';
         for (let i = 0; i < 4 - arr.length; i++) {
           newTemp += temp[i];
         }
-        temp = newTemp; // keep the digits back to where it was on recursion
-
+        temp = newTemp; // temp is now the correct length before adding
         temp += arr[i]; // add the newest digit
       }
-      // copy original array, remove the index that was just added
-      const copy = [...arr];
-      copy.splice(i, 1);
-      const newArray = [...copy];
-
-      if (newArray.length > 0) {
-        // if not done, keep going
-        getPermutations(newArray);
-      }
       if (temp.length === 4) {
+        // if temp is full, push to permutations
         permutations.push(temp);
-        temp = temp[0] + temp[1] + temp[2]; // delete last char
+      } else {
+        // if not done, copy, remove the index that was added, and
+        // call the new, shorter array recursively
+        const copy = [...arr];
+        copy.splice(i, 1);
+        const newArray = [...copy];
+        getPermutations(newArray);
       }
     }
   };
