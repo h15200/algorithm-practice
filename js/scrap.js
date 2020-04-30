@@ -144,6 +144,16 @@
 // yes
 
 // making an array with Array and fill
-const test = Array(3).fill('hi'); // ['hi', 'hi', 'hi']
+// const test = Array(3).fill('hi'); // ['hi', 'hi', 'hi']
 
 // .fill() has optional 2nd arg and 3rd arg which is the starting index and ending index to fill the value with
+
+// multiple equalities
+
+// remember, '1' is true and '0' is false
+// console.log(((2.0 == '2') == new Boolean(true)) == '1'); // true
+
+// can strings use includes?
+
+// const str = 'hello there';
+// console.log(str.includes('o'));
