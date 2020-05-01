@@ -157,3 +157,21 @@
 
 // const str = 'hello there';
 // console.log(str.includes('o'));
+
+// function numberOfNames(num, total = 0, op = true) {
+//   const pentagonalArray = [];
+
+//   const numArray = [];
+//   for (let i = 1; i < 200; i++) {
+//     numArray.push(i);
+//     numArray.push(-i);
+//   }
+//   // formula for pentagonal P(n) = (3n**2 -2) /2
+//   for (let num of numArray) {
+//     pentagonalArray.push((3 * num ** 2 - num) / 2);
+//   }
+
+//   console.log(pentagonalArray);
+// }
+
+// numberOfNames();
