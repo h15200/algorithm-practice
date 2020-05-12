@@ -176,6 +176,103 @@
 
 // numberOfNames();
 
-const a = { a: 0, b: 1 };
+// const a = { a: 0, b: 1 };
 
-console.log(a['b']);
+// console.log(a['b']);
+
+//  CHALLENGE 1
+//   Given an array, return a new array with the duplicate elements removed.
+// ​
+//   Example:
+//   removeDuplicates([3, 1, 3, 2, 9, 1]) ->
+//   [3, 1, 2, 9]
+
+// console.log('hi');
+
+// const removeDuplicates = (arr) => {
+//   return Array.from(new Set(arr));
+// };
+
+// const arr = removeDuplicates([3, 1, 3, 2, 9, 1]);
+// console.log(Array.isArray(arr));
+
+//  CHALLENGE 2
+//   Given an arbitrary number of arrays, return a new array
+//   representing the union of the arrays.
+//   Do this in O(n) time.
+// ​
+//   Example:
+// ​
+//   union([1, 3, 7], [2, 3, 9], [9, 13]) ->
+//   [1, 3, 7, 2, 9, 13]
+// ​
+//   union([4, 3]) ->
+//   [4, 3]
+// ​
+//   union([6, 7, 8], [7, 8, 9]) ->
+//   [6, 7, 8, 9]
+
+// const union = (...arrays) => {
+//   const combinedArr = arrays.reduce((a, b) => [...a, ...b]);
+//   return Array.from(new Set(combinedArr));
+// };
+
+// console.log(union([1, 2, 3], [2, 3, 4], [3, 4, 5]));
+
+// ​
+//  CHALLENGE 3
+//   Given a string, return the character that has the maximum frequency.
+//   If multiple characters occur the max number of times,
+//   return the character that occurs first in the string.
+// ​
+//   Example:
+// ​
+//   maxChar('good morning') -> 'o'
+//   maxChar('abbcc') -> 'b'
+
+// const maxChar = (str) => {
+//   const set = new Set(str);
+//   const uniqueStr = Array.from(set).join('');
+//   if (str === uniqueStr) {
+//     console.log('here');
+//     return str[0];
+//   }
+// };
+// console.log(maxChar('aabbc'));
+
+//  CHALLENGE 4
+//   Given an array of integers and a target integer,
+//   return true if a pair of integers exist in the array that add up tot he target.
+//   Return false otherwise.
+// ​
+//   Example:
+//   twoSum([2, 4, 5], 9) -> true
+//   twoSum([2, 4, 5], 8) -> false
+//   twoSum([5, -1, -2, 3], 1) -> true
+
+// bind
+
+function functionBind(func, context) {
+  // using bind, bind given func to given context
+  //  return func.bind(context);
+
+  // without using bind
+  // context = {name: kim}    func = () => alert(this.name)
+  context.shout = func;
+  return () => context.shout();
+}
+
+const matt = {
+  name: 'matt',
+  shout: function () {
+    console.log(this.name);
+  },
+};
+
+let a = functionBind(matt.shout, { name: 'patti' });
+a = functionBind(matt.shout, { name: 'lady' });
+a();
+//  let boundShout = functionBind(matt.shout, matt);
+//  boundShout(); -> alerts 'matt;
+//  boundShout = functionBind(matt.shout, {name: 'kim'});
+//  boundShout(); -> alerts 'kim'
